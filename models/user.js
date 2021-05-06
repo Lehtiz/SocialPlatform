@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema(
   {
     isAdmin: {
-    type: Boolean,
-    default: false
+      type: Boolean,
+      default: false
     },
     username: {
       type: String,
@@ -43,9 +43,9 @@ const UserSchema = new mongoose.Schema(
       default: []
     },
     desc: {
-    type: String,
-    max: 100,
-    default: ''
+      type: String,
+      max: 100,
+      default: ''
     },
     city: {
       type: String,
@@ -53,7 +53,7 @@ const UserSchema = new mongoose.Schema(
       default: ''
     },
     from: {
-      type:String,
+      type: String,
       max: 50,
       default: ''
     },
@@ -61,12 +61,11 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       enum: [0, 1, 2, 3],
       default: 0
-    },
+    }
   },
   // Automatically update timestamps everytime data is changed
   { timestamps: true }
 );
-
 
 // Export model as User
 module.exports = mongoose.model('User', UserSchema);
