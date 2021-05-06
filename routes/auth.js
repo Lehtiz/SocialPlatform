@@ -11,7 +11,7 @@ const saltRounds = 10;
 router.post('/register', async (req, res) => {
   try {
     // Turn cleartext password into hashed one before saving to db
-    await bcrypt.hash(req.body.password, saltRounds, (err, hashedPassword) => {
+    await bcrypt.hash(req.body.password, saltRounds, (error, hashedPassword) => {
       // create a new user with the following info from post body
       const newUser = new User({
         username: req.body.username,
@@ -24,9 +24,9 @@ router.post('/register', async (req, res) => {
       // respond with 200 success
       res.status(200).json(newUser);
     });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
 });
 
@@ -42,9 +42,9 @@ router.post('/login', async (req, res) => {
     if (!validPassword) res.status(400).json('wrong password');
 
     res.status(200).json(user);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
   }
 });
 
