@@ -14,13 +14,10 @@ const authRoute = require('./routes/auth');
 // Loads .env file contents into process.env
 dotenv.config();
 
-const start = new Date().getTime();
 // Establish MongoDB connection
 // slow connection why seems to be caused by; useUnifiedTopology: true
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
   console.log('Connected to MongoDB');
-  const stop = new Date().getTime();
-  console.log('Took this long: ', (stop - start) / 1000);
 });
 
 // Middleware
