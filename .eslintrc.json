@@ -46,8 +46,8 @@
           "props": false
         }
       ],
-      "allowShortCircuit": true, // allow cheaty if statements
-      "allowTernary": false,
+      "allowShortCircuit": 0, // allow !user && foo
+      "allowTernary": 0,
       "no-console": 0,
       "import/prefer-default-export": 0,
       "import": 0,
