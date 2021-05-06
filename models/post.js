@@ -5,12 +5,13 @@ const PostSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
-      required: true
+      required: true // user cannot be empty
     },
     desc: {
       type: String,
       max: 500,
-      min: 1
+      min: 1,
+      required: true // post cannot be empty
     },
     img: {
       type: String
