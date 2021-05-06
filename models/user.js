@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 // Define a model for User
 const UserSchema = new mongoose.Schema(
   {
+    isAdmin: {
+    type: Boolean,
+    default: false
+    },
     username: {
       type: String,
       require: true,
@@ -38,14 +42,31 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: []
     },
-    isAdmin: {
-      type: Boolean,
-      default: false
-    }
+    desc: {
+    type: String,
+    max: 100,
+    default: ''
+    },
+    city: {
+      type: String,
+      max: 50,
+      default: ''
+    },
+    from: {
+      type:String,
+      max: 50,
+      default: ''
+    },
+    relationship: {
+      type: Number,
+      enum: [0, 1, 2, 3],
+      default: 0
+    },
   },
   // Automatically update timestamps everytime data is changed
   { timestamps: true }
 );
+
 
 // Export model as User
 module.exports = mongoose.model('User', UserSchema);
