@@ -4,15 +4,23 @@ const User = require('../models/user');
 
 // REGISTER
 // database call so we use async/await
-router.get('/register', async (req, res) => {
-  const user = await new User({
-    username: 'test',
-    email: 'test@tester.test',
-    password: 'test1234'
+router.post('/register', async (req, res) => {
+  // create a new user with the following info from post body
+  const newUser = await new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
   });
 
-  // writing into db
-  await user.save();
+  // Save user into db
+  try {
+    const user = await newUser.save();
+    // respond with 200 success
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500);
+  }
 });
 
 // Export route (make visible)
