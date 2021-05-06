@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 // Define routes
-const userRoute = require('./routes/users');
+const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
 
 // Loads .env file contents into process.env
@@ -26,7 +26,7 @@ app.use(helmet());
 app.use(morgan('tiny'));
 
 // Use routes
-app.use('/api/users', userRoute);
+app.use('/api/user', userRoute);
 app.use('/api/auth', authRoute);
 
 app.get('/', (req, res) => {
