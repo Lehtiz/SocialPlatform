@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
       });
 
       // Save user into db
-      const user = newUser.save();
+      newUser.save();
       // respond with 200 success
       res.status(200).json(newUser);
     });
