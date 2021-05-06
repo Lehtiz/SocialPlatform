@@ -10,6 +10,7 @@ const morgan = require('morgan');
 // Define routes
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
+const postRoute = require('./routes/post');
 
 // Loads .env file contents into process.env
 dotenv.config();
@@ -28,6 +29,7 @@ app.use(morgan('tiny'));
 // Use routes
 app.use('/api/user', userRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/post', postRoute);
 
 app.get('/', (req, res) => {
   res.send('Welcome to homepage');
