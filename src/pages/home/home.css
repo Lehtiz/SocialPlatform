@@ -1,9 +1,9 @@
-.homeContainer {
-  display: flex;
-  width: 100%;
+::-webkit-scrollbar {
+  width: 5px;
 }
-.layoutHeader {
-  display: flex;
+::-webkit-scrollbar-track {
+  color: #f1f1f1;
 }
-.layoutPanel {
+::-webkit-scrollbar-thumb {
+  background-color: rgb(179, 179, 179);
 }
