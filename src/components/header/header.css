@@ -1,0 +1,95 @@
+/* Layout */
+.headerContainer {
+  height: 50px;
+  width: 100%;
+  background-color: #1877f2;
+  display: flex; /* fill flexbox */
+  align-items: center;
+  position: sticky; /* Sticks to top */
+  top: 0;
+}
+
+.headerLeft {
+  flex: 3;
+}
+.headerCenter {
+  flex: 5;
+}
+.headerRight {
+  flex: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+}
+
+/* Seachbar */
+.searchbar {
+  width: 100%;
+  height: 30px;
+  background-color: white;
+  border-radius: 12px; /* rounds border edges */
+  display: flex;
+  align-items: center; /* center items */
+}
+.searchIcon {
+  font-size: 20px !important; /* icon is a materials-ui object, !important overrides for css */
+  margin-left: 10px;
+}
+.searchbarInput {
+  border: none;
+  width: 70%;
+}
+.searchbarInput:focus {
+  outline: none;
+}
+
+/* Links */
+.headerLinksContainer {
+  display: flex;
+}
+.headerLink {
+  margin-right: 10px;
+  font-style: 14px;
+  cursor: pointer;
+}
+
+/* Icons and images */
+.headerLogo {
+  margin-left: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.headerIconsContainer {
+  display: flex;
+}
+.headerIconItem {
+  margin-right: 15px;
+  cursor: pointer;
+  position: relative; /* relative, for icon badge */
+}
+.headerIconBadge {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  position: absolute; /* allows overlaying badges to icons */
+  top: -5px; /* move badge below text */
+  right: -5px;
+  display: flex;
+  align-items: center; /* aligns hor */
+  justify-content: center; /* aligns ver */
+  font-size: 12px;
+}
+
+.headerImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover; /* disables streching of image inside */
+  cursor: pointer;
+  margin-right: 10px;
+}
