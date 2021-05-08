@@ -1,3 +1,8 @@
+import RoomIcon from '@material-ui/icons/Room';
+import LabelIcon from '@material-ui/icons/Label';
+import MoodIcon from '@material-ui/icons/Mood';
+import PermMediaIcon from '@material-ui/icons/PermMedia';
+
 export default function share() {
   return (
     <div className="shadow-lg h-44 rounded-xl">
@@ -14,19 +19,19 @@ export default function share() {
         <div className="flex items-center justify-between" />
         <div className="flex mx-4">
           <div className="flex items-center mr-4 cursor-pointer">
-            <img className="w-5 h-5 mr-1" src="./assets/icons/media.svg" alt="media" />
+            <PermMediaIcon className="w-5 h-5 mr-1" />
             <span className="">photo or video</span>
           </div>
           <div className="flex items-center mr-4 cursor-pointer">
-            <img className="w-5 h-5 mr-1" src="./assets/icons/tag.svg" alt="tag" />
+            <LabelIcon htmlColor="blue" className="w-6 h-6 mr-1" />
             <span className="">Tag</span>
           </div>
           <div className="flex items-center mr-4 cursor-pointer">
-            <img className="w-5 h-5 mr-1" src="./assets/icons/location.svg" alt="location" />
+            <RoomIcon htmlColor="green" className="w-6 h-6 mr-1" />
             <span className="">Location</span>
           </div>
           <div className="flex items-center mr-4 cursor-pointer">
-            <img className="w-5 h-5 mr-1" src="./assets/icons/emote-happy.svg" alt="emotions" />
+            <MoodIcon className="w-5 h-5 mr-1" />
             <span className="">Emotion</span>
           </div>
         </div>

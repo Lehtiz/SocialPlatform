@@ -1,42 +1,52 @@
+import RssFeedIcon from '@material-ui/icons/RssFeed';
+import ChatIcon from '@material-ui/icons/Chat';
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import GroupIcon from '@material-ui/icons/Group';
+import BookmarksIcon from '@material-ui/icons/Bookmarks';
+import HelpIcon from '@material-ui/icons/Help';
+import WorkIcon from '@material-ui/icons/Work';
+import EventIcon from '@material-ui/icons/Event';
+import SchoolIcon from '@material-ui/icons/School';
+
 export default function leftpanel() {
   return (
     <div className="w-full overflow-y-scroll">
       <div className="p-5">
         <ul className="p-0 m-0 list-none">
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/feed.svg" alt="Feed" className="h-6 mr-4" />
+            <RssFeedIcon className="h-6 mr-4" />
             <span className="">Feed</span>
           </li>
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/chat.svg" alt="Chat" className="h-6 mr-4" />
+            <ChatIcon className="h-6 mr-4" />
             <span className="">Chat</span>
           </li>
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/videos.svg" alt="Videos" className="h-6 mr-4" />
+            <PlayCircleFilledIcon className="h-6 mr-4" />
             <span className="">Videos</span>
           </li>
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/groups.svg" alt="Groups" className="h-6 mr-4" />
+            <GroupIcon className="h-6 mr-4" />
             <span className="">Groups</span>
           </li>
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/bookmark.svg" alt="Bookmarks" className="h-6 mr-4" />
+            <BookmarksIcon className="h-6 mr-4" />
             <span className="">Bookmarks</span>
           </li>
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/question.svg" alt="Questions" className="h-6 mr-4" />
+            <HelpIcon className="h-6 mr-4" />
             <span className="">Questions</span>
           </li>
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/briefcase.svg" alt="Jobs" className="h-6 mr-4" />
+            <WorkIcon className="h-6 mr-4" />
             <span className="">Jobs</span>
           </li>
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/calendar.svg" alt="Events" className="h-6 mr-4" />
+            <EventIcon className="h-6 mr-4" />
             <span className="">Events</span>
           </li>
           <li className="flex items-center mb-5">
-            <img src="./assets/icons/academic-cap.svg" alt="Courses" className="h-6 mr-4" />
+            <SchoolIcon className="h-6 mr-4" />
             <span className="">Courses</span>
           </li>
         </ul>
