@@ -2,7 +2,7 @@ import Share from '../share';
 import Post from '../post';
 import { Posts } from '../../dummydata';
 
-export default function feed() {
+export default function Feed() {
   return (
     <div className="w-full min-h-full p-3 overflow-y-scroll">
       <div className="w-full">

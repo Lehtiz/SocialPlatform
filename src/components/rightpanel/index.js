@@ -1,4 +1,5 @@
 import CakeIcon from '@material-ui/icons/Cake';
+import { Users } from '../../dummydata';
 
 export default function rightpanel() {
   return (
@@ -30,17 +31,6 @@ export default function rightpanel() {
               <span className="absolute w-4 h-4 border-2 border-white rounded-full -top-1 right-1 bg-green-online" />
             </div>
             <span className="font-medium">John Carter</span>
-          </li>
-          <li className="flex items-center mb-4">
-            <div className="relative flex items-center mr-2">
-              <img
-                className="object-cover w-12 h-12 mr-1 rounded-full"
-                src="assets/avatars/7.jpg"
-                alt="7.jpg"
-              />
-              <span className="absolute w-4 h-4 border-2 border-white rounded-full -top-1 right-1 bg-red-offline" />
-            </div>
-            <span className="font-medium">Sally Croft</span>
           </li>
         </ul>
       </div>

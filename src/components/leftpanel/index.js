@@ -8,7 +8,7 @@ import WorkIcon from '@material-ui/icons/Work';
 import EventIcon from '@material-ui/icons/Event';
 import SchoolIcon from '@material-ui/icons/School';
 
-export default function leftpanel() {
+export default function Leftpanel() {
   return (
     <div className="w-full overflow-y-scroll">
       <div className="p-5">

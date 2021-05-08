@@ -5,7 +5,7 @@ import LeftPanel from '../../components/leftpanel';
 import Feed from '../../components/feed';
 import RightPanel from '../../components/rightpanel';
 
-export default function home() {
+export default function Home() {
   return (
     <>
       <div className="flex">

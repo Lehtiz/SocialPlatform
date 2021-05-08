@@ -3,7 +3,7 @@ import LabelIcon from '@material-ui/icons/Label';
 import MoodIcon from '@material-ui/icons/Mood';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 
-export default function share() {
+export default function Share() {
   return (
     <div className="shadow-lg h-44 rounded-xl">
       <div className="p-2">

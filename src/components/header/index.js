@@ -3,7 +3,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
 
-export default function header() {
+export default function Header() {
   return (
     <div className="sticky top-0 flex items-center w-full h-12 bg-blue-medium">
       <div className="flex w-3/12">
