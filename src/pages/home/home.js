@@ -14,9 +14,15 @@ export default function home() {
           <Header />
         </div>
         <div className="flex justify-between w-full h-screen pt-12 ">
-          <LeftPanel />
-          <Feed />
-          <RightPanel />
+          <div className="flex w-3/12">
+            <LeftPanel />
+          </div>
+          <div className="flex w-5/12">
+            <Feed />
+          </div>
+          <div className="flex w-4/12">
+            <RightPanel />
+          </div>
         </div>
       </div>
     </>

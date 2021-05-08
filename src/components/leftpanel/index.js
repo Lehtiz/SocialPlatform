@@ -1,6 +1,6 @@
 export default function leftpanel() {
   return (
-    <div className="flex w-3/12 overflow-y-scroll">
+    <div className="w-full overflow-y-scroll">
       <div className="p-5">
         <ul className="p-0 m-0 list-none">
           <li className="flex items-center mb-5">
