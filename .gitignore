@@ -26,3 +26,4 @@ yarn-error.log*
 TODO
 .env
 /src/styles/app.css
+/.vscode
