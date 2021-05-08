@@ -16,7 +16,7 @@ export default function rightpanel() {
         <img
           src="./assets/posts/1.jpg"
           alt="pic of the day"
-          className="object-contain w-full max-h-96"
+          className="object-cover w-full rounded-md max-h-96"
         />
       </div>
       <div className="w-full mb-3">
