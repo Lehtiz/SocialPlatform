@@ -11,7 +11,15 @@ module.exports = {
         medium: '#1877f2'
       },
       red: {
-        primary: '#FF0000'
+        primary: '#FF0000',
+        offline: '#FF0000'
+      },
+      green: {
+        button: '#008000',
+        online: '#00FF00'
+      },
+      gray: {
+        border: '#808080'
       }
     }
   },
