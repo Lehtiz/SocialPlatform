@@ -19,7 +19,8 @@ module.exports = {
         online: '#00FF00'
       },
       gray: {
-        border: '#808080'
+        border: '#808080',
+        light: '#808080'
       }
     }
   },
