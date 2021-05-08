@@ -8,7 +8,7 @@ import RightPanel from '../../components/rightpanel';
 export default function home() {
   return (
     <>
-      <div className="sidebar">
+      <div className="flex">
         {/* Moved header absolute upwards to prevent it from being in viewport calc */}
         <div className="absolute left-0 flex w-full h-12 pt-12 -top-12">
           <Header />
