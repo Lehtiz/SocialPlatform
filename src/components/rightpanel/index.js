@@ -1,4 +1,5 @@
 import CakeIcon from '@material-ui/icons/Cake';
+import OnlineFriends from '../online-friends';
 import { Users } from '../../dummydata';
 
 export default function rightpanel() {
@@ -21,17 +22,9 @@ export default function rightpanel() {
       <div className="w-full mb-3">
         <h4 className="mb-5 font-bold">Online Friends</h4>
         <ul className="p-0 m-0 list-none">
-          <li className="flex items-center mb-4">
-            <div className="relative flex items-center mr-2">
-              <img
-                className="object-cover w-12 h-12 mr-1 rounded-full"
-                src="assets/avatars/3.jpg"
-                alt="3.jpg"
-              />
-              <span className="absolute w-4 h-4 border-2 border-white rounded-full -top-1 right-1 bg-green-online" />
-            </div>
-            <span className="font-medium">John Carter</span>
-          </li>
+          {Users.map((u) => (
+            <OnlineFriends key={u.id} user={u} />
+          ))}
         </ul>
       </div>
     </div>
