@@ -3,9 +3,18 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
+import { useState } from 'react';
 import { Users } from '../../dummydata';
 
 export default function Post({ post }) {
+  const [likes, setLikes] = useState(post.likes);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const likeHandler = () => {
+    setLikes(isLiked ? likes - 1 : likes + 1);
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div className="w-full mt-3 overflow-y-scroll rounded-lg shadow-lg">
       <div className="p-2">
@@ -32,9 +41,9 @@ export default function Post({ post }) {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <FavoriteBorderIcon className="w-6 h-6 mr-1 cursor-pointer" />
-            <ExposurePlus1Icon className="w-6 h-6 mr-1 cursor-pointer" />
+            <ExposurePlus1Icon className="w-6 h-6 mr-1 cursor-pointer" onClick={likeHandler} />
             <span className="text-sm">
-              {post.likes} {post.likes === 1 ? `like` : `likes`}
+              {likes} {likes === 1 ? `like` : `likes`}
             </span>
           </div>
           <div className="text-sm border-b border-dashed cursor-pointer border-gray-border">
