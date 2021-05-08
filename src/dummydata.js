@@ -26,32 +26,32 @@ export const Users = [
   },
   {
     id: 6,
-    profilePicture: 'assets/avatars/2.jpg',
+    profilePicture: 'assets/avatars/6.jpg',
     username: 'Patric Donahue'
   },
   {
     id: 7,
-    profilePicture: 'assets/avatars/2.jpg',
+    profilePicture: 'assets/avatars/7.jpg',
     username: 'sally Croft'
   },
   {
     id: 8,
-    profilePicture: 'assets/avatars/2.jpg',
+    profilePicture: 'assets/avatars/8.jpg',
     username: 'Rasmus Foley'
   },
   {
     id: 9,
-    profilePicture: 'assets/avatars/2.jpg',
+    profilePicture: 'assets/avatars/9.jpg',
     username: 'Megan Mallory'
   },
   {
     id: 10,
-    profilePicture: 'assets/avatars/2.jpg',
+    profilePicture: 'assets/avatars/10.jpg',
     username: 'Don Davidson'
   },
   {
     id: 11,
-    profilePicture: 'assets/avatars/2.jpg',
+    profilePicture: 'assets/avatars/11.jpg',
     username: 'Estella Frank'
   }
 ];
