@@ -13,7 +13,7 @@ module.exports = {
       red: {
         primary: '#FF0000'
       }
-    },
+    }
   },
   variants: {
     extend: {}
