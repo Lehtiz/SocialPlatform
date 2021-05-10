@@ -1,7 +1,23 @@
-import Home from './pages/home';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import * as ROUTES from './constants/routes';
+
+const Home = lazy(() => import('./pages/home'));
+const Login = lazy(() => import('./pages/login'));
+const Profile = lazy(() => import('./pages/profile'));
 
 function App() {
-  return <Home />;
+  return (
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path={ROUTES.LOGIN} component={Login} />
+          <Route path={ROUTES.PROFILE} component={Profile} />
+          <Route path={ROUTES.HOME} component={Home} />
+        </Switch>
+      </Suspense>
+    </Router>
+  );
 }
 
 export default App;

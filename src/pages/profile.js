@@ -1,7 +1,7 @@
-import Header from '../../components/header';
-import LeftPanel from '../../components/leftpanel';
-import Feed from '../../components/feed';
-import RightPanel from '../../components/rightpanel';
+import Header from '../components/header';
+import LeftPanel from '../components/leftpanel';
+import Feed from '../components/feed';
+import RightPanelProfile from '../components/rightpanel/profile';
 
 export default function Profile() {
   return (
@@ -41,7 +41,7 @@ export default function Profile() {
 
             <div className="flex">
               <Feed />
-              <RightPanel profile />
+              <RightPanelProfile />
             </div>
           </div>
         </div>
