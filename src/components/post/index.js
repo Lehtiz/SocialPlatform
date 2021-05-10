@@ -1,7 +1,7 @@
 import { fromUnixTime, formatDistanceToNow } from 'date-fns';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import { useState } from 'react';
 import { Users } from '../../dummydata';

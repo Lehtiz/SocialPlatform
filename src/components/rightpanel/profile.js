@@ -1,6 +1,4 @@
-import CakeIcon from '@material-ui/icons/Cake';
-import OnlineFriends from '../online-friends';
-import { Users } from '../../dummydata';
+// import CakeIcon from '@material-ui/icons/Cake';
 
 export default function RightPanelProfile() {
   return (
