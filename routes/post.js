@@ -86,9 +86,9 @@ router.get('/:id', async (req, res) => {
 
 // GET TIMELINE POSTS
 // api/post/timeline/all <- timeline alone conflicts with get post
-router.get('/timeline/all', async (req, res) => {
+router.get('/timeline/:userId', async (req, res) => {
   try {
-    const currentUser = await User.findById(req.body.userId);
+    const currentUser = await User.findById(req.params.userId);
     const userPosts = await Post.find({ userId: currentUser._id });
     // use promise to get all awaits in
     const friendPosts = await Promise.all(
