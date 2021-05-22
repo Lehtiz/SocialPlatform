@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -9,7 +9,9 @@ export default function Header() {
   return (
     <div className="sticky top-0 flex items-center w-full h-12 bg-blue-medium">
       <div className="flex w-3/12">
-        <span className="ml-5 text-2xl font-bold text-white cursor-pointer">Social</span>
+        <Link to="/home">
+          <span className="ml-5 text-2xl font-bold text-white cursor-pointer">Social</span>
+        </Link>
       </div>
       <div className="flex w-5/12">
         <div className="flex items-center justify-center w-full h-8 bg-white rounded-lg">
@@ -22,10 +24,22 @@ export default function Header() {
       </div>
       <div className="flex items-center justify-around w-4/12 text-white">
         <div className="flex">
-          <NavLink to="/home">
+          <NavLink
+            to="/home"
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'white'
+            }}
+          >
             <span className="mr-3 text-lg cursor-pointer">Homepage</span>
           </NavLink>
-          <NavLink to="/profile">
+          <NavLink
+            to="/profile"
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'white'
+            }}
+          >
             <span className="mr-3 text-lg cursor-pointer">Timeline</span>
           </NavLink>
         </div>
