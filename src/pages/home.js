@@ -1,5 +1,3 @@
-// webkit overrides for scrollbar styling
-import './scrollbar.css';
 import Header from '../components/header';
 import LeftPanel from '../components/leftpanel';
 import Feed from '../components/feed';

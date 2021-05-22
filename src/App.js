@@ -1,3 +1,5 @@
+// webkit overrides for scrollbar styling
+import './pages/scrollbar.css';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import * as ROUTES from './constants/routes';
