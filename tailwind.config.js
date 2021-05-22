@@ -3,7 +3,9 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    serif: 'Roboto',
+    fontFamily: {
+      serif: 'Roboto'
+    },
     extend: {},
     colors: {
       white: '#ffffff',
