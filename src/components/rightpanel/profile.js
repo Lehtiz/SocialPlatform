@@ -1,4 +1,5 @@
 // import CakeIcon from '@material-ui/icons/Cake';
+import { PF } from '../../constants/const';
 
 export default function RightPanelProfile() {
   return (
@@ -23,7 +24,7 @@ export default function RightPanelProfile() {
         <div className="flex flex-wrap items-center">
           <div className="flex-col items-center mb-4 mr-4">
             <img
-              src="./assets/avatars/11.jpg"
+              src={`${PF}avatars/11.jpg`}
               alt="name"
               className="object-cover w-32 h-32 rounded-lg cursor-pointer"
             />

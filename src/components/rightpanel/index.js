@@ -1,6 +1,7 @@
 import CakeIcon from '@material-ui/icons/Cake';
 import OnlineFriends from '../online-friends';
 import { Users } from '../../dummydata';
+import { PF } from '../../constants/const';
 
 export default function RightPanel() {
   return (
@@ -15,7 +16,7 @@ export default function RightPanel() {
         <div className="w-full mb-5">
           <h2 className="text-3xl font-bold">Picture of the day</h2>
           <img
-            src="./assets/posts/1.jpg"
+            src={`${PF}posts/1.jpg`}
             alt="pic of the day"
             className="object-cover w-full rounded-md max-h-96"
           />

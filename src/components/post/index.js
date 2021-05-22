@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import { useState } from 'react';
 import { Users } from '../../dummydata';
+import { PF } from '../../constants/const';
 
 export default function Post({ post }) {
   const [likes, setLikes] = useState(post.likes);
@@ -21,7 +22,7 @@ export default function Post({ post }) {
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-between">
             <img
-              src={Users.filter((u) => u.id === post.userId)[0].profilePicture}
+              src={PF + Users.filter((u) => u.id === post.userId)[0].profilePicture}
               alt="profileImage"
               className="object-cover w-12 h-12 rounded-full"
             />
@@ -36,7 +37,7 @@ export default function Post({ post }) {
         </div>
         <div className="my-5">
           <span className="">{post?.desc}</span>
-          <img src={post.photo} alt="post" className="object-contain w-full mt-5 max-h-96" />
+          <img src={PF + post.photo} alt="post" className="object-contain w-full mt-5 max-h-96" />
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center">

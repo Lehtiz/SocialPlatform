@@ -2,6 +2,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import LabelIcon from '@material-ui/icons/Label';
 import MoodIcon from '@material-ui/icons/Mood';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
+import { PF } from '../../constants/const';
 
 export default function Share() {
   return (
@@ -10,7 +11,7 @@ export default function Share() {
         <div className="flex items-center mb-1">
           <img
             className="object-cover w-12 h-12 mr-3 rounded-full"
-            src="./assets/avatars/1.jpg"
+            src={`${PF}avatars/1.jpg`}
             alt="1.jpg"
           />
           <input type="text" placeholder="Whats on your mind?" className="w-4/5 outline-none" />
@@ -37,7 +38,7 @@ export default function Share() {
           </div>
           <div className="flex mr-5">
             <button
-              className="p-2 font-medium text-white border-none rounded-md cursor-pointer bg-green-button"
+              className="p-2 font-medium text-white border-none rounded-md outline-none cursor-pointer bg-green-button"
               type="button"
             >
               Share
