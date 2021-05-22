@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -20,8 +21,12 @@ export default function Header() {
       </div>
       <div className="flex items-center justify-around w-4/12 text-white">
         <div className="flex">
-          <span className="mr-3 text-lg cursor-pointer">Homepage</span>
-          <span className="mr-3 text-lg cursor-pointer">Timeline</span>
+          <NavLink to="/home">
+            <span className="mr-3 text-lg cursor-pointer">Homepage</span>
+          </NavLink>
+          <NavLink to="/profile">
+            <span className="mr-3 text-lg cursor-pointer">Timeline</span>
+          </NavLink>
         </div>
         <div className="flex">
           <div className="relative mr-4 cursor-pointer">
