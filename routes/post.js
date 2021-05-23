@@ -84,7 +84,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// GET TIMELINE POSTS
+// GET USERS AND FRIENDS TIMELINE POSTS
 // api/post/timeline/all <- timeline alone conflicts with get post
 router.get('/timeline/:userId', async (req, res) => {
   try {
@@ -92,12 +92,21 @@ router.get('/timeline/:userId', async (req, res) => {
     const userPosts = await Post.find({ userId: currentUser._id });
     // use promise to get all awaits in
     const friendPosts = await Promise.all(
-      currentUser.followings.map((friendId) => {
-        return Post.find({ userId: friendId });
-      })
+      currentUser.followings.map((friendId) => Post.find({ userId: friendId }))
     );
     // Take all userPosts and concat with friendPosts
     res.status(200).json(userPosts.concat(...friendPosts));
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// GET only users posts
+router.get('/profile/:username', async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username });
+    const posts = await Post.find({ userId: user._id });
+    res.status(200).json(posts);
   } catch (error) {
     res.status(500).json(error);
   }
