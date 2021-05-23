@@ -2,11 +2,6 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-// Map homepage of api/users/
-router.get('/', (req, res) => {
-  res.send('Hello api user');
-});
-
 // Setup for bcrypt
 const saltRounds = 10;
 
@@ -49,9 +44,12 @@ router.delete('/:id', async (req, res) => {
 });
 
 // GET A USER
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
+  const { userId } = req.query;
+  const { username } = req.query;
   try {
-    const user = await User.findById(req.params.id);
+    // use username to fetch user
+    const user = userId ? await User.findById(userId) : await User.findOne({ username });
     // Strip not wanted data like password from result, pass other
     const { password, ...other } = user._doc;
     // return other data
