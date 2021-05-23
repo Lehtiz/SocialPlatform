@@ -3,7 +3,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
-import { PF } from '../../constants/const';
+import { PF, PROFILES_FOLDER, DEFAULT_AVATAR } from '../constants/const';
 
 export default function Header() {
   return (
@@ -65,8 +65,8 @@ export default function Header() {
         </div>
       </div>
       <img
-        src={`${PF}avatars/1.jpg`}
-        alt=""
+        src={DEFAULT_AVATAR}
+        alt="avatar"
         className="object-cover w-8 h-8 mr-3 border-none cursor-pointer rounded-2xl"
       />
     </div>

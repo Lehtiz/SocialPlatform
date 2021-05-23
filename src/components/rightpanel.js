@@ -1,7 +1,7 @@
 import CakeIcon from '@material-ui/icons/Cake';
-import OnlineFriends from '../online-friends';
-import { Users } from '../../dummydata';
-import { PF } from '../../constants/const';
+import OnlineFriends from './online-friends';
+import { Users } from '../dummydata';
+import { PF } from '../constants/const';
 
 export default function RightPanel() {
   return (

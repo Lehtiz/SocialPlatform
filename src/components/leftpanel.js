@@ -7,8 +7,8 @@ import HelpIcon from '@material-ui/icons/Help';
 import WorkIcon from '@material-ui/icons/Work';
 import EventIcon from '@material-ui/icons/Event';
 import SchoolIcon from '@material-ui/icons/School';
-import { Users } from '../../dummydata';
-import AllUsers from '../all-users';
+import { Users } from '../dummydata';
+import AllUsers from './all-users';
 
 export default function Leftpanel() {
   return (

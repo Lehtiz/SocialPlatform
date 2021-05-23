@@ -5,20 +5,22 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import { useEffect, useState } from 'react';
-import { PF } from '../../constants/const';
+import { Link } from 'react-router-dom';
+import { PF, PROFILES_FOLDER, POSTS_FOLDER, DEFAULT_AVATAR } from '../constants/const';
 
 export default function Post({ post }) {
   const [likes, setLikes] = useState(post.likes);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
 
+  // Get posts user
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`user/${post.userId}`);
+      const res = await axios.get(`/user?userId=${post.userId}`);
       setUser(res.data);
     };
     fetchUser();
-  }, []);
+  }, [post.userId]);
 
   const likeHandler = () => {
     setLikes(isLiked ? likes - 1 : likes + 1);
@@ -30,18 +32,20 @@ export default function Post({ post }) {
       <div className="p-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-between">
-            <img
-              src={
-                user.profilePicture !== ''
-                  ? PF + user.profilePicture
-                  : `${PF}default_profile_image.jpg`
-              }
-              alt="profileImage"
-              className="object-cover w-12 h-12 rounded-full"
-            />
-            <span className="mx-2 text-base">{user.username}</span>
+            <Link to={`/profile/${user.username}`}>
+              <img
+                src={
+                  user.profilePicture
+                    ? `${PROFILES_FOLDER + user.profilePicture}`
+                    : `${DEFAULT_AVATAR}`
+                }
+                alt="profileImage"
+                className="object-cover w-12 h-12 rounded-full cursor-pointer"
+              />
+            </Link>
+            <span className="mx-2 text-base font-medium">{user.username}</span>
             <span className="mx-2 text-base opacity-70">
-              Post age: {formatDistanceToNow(parseISO(post.updatedAt))}
+              Post age: {formatDistanceToNow(parseISO(post.createdAt))}
             </span>
           </div>
           <MoreVertIcon className="w-6 h-6 mr-1 cursor-pointer" />
@@ -49,7 +53,11 @@ export default function Post({ post }) {
         <div className="my-5">
           <span className="">{post?.desc}</span>
           {post.img !== undefined ? (
-            <img src={PF + post.img} alt="post" className="object-contain w-full mt-5 max-h-96" />
+            <img
+              src={POSTS_FOLDER + post.img}
+              alt="post"
+              className="object-contain w-full mt-5 max-h-96"
+            />
           ) : null}
         </div>
         <div className="flex items-center justify-between">

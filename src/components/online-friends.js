@@ -1,4 +1,4 @@
-import { PF } from '../../constants/const';
+import { PF } from '../constants/const';
 
 export default function OnlineFriends({ user }) {
   return (
