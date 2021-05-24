@@ -3,9 +3,12 @@ import PersonIcon from '@material-ui/icons/Person';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
+import { useContext } from 'react';
 import { PF, PROFILES_FOLDER, DEFAULT_AVATAR } from '../constants/const';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Header() {
+  const { user } = useContext(AuthContext);
   return (
     <div className="sticky top-0 flex items-center w-full h-12 bg-blue-medium">
       <div className="flex w-3/12">
@@ -25,7 +28,7 @@ export default function Header() {
       <div className="flex items-center justify-around w-4/12 text-white">
         <div className="flex">
           <NavLink
-            to="/home"
+            to="/"
             activeStyle={{
               fontWeight: 'bold',
               color: 'white'
@@ -34,7 +37,7 @@ export default function Header() {
             <span className="mr-3 text-lg cursor-pointer">Homepage</span>
           </NavLink>
           <NavLink
-            to="/profile"
+            to={`/profile/${user?.username}`}
             activeStyle={{
               fontWeight: 'bold',
               color: 'white'
@@ -64,11 +67,15 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <img
-        src={DEFAULT_AVATAR}
-        alt="avatar"
-        className="object-cover w-8 h-8 mr-3 border-none cursor-pointer rounded-2xl"
-      />
+      <Link to={`/profile/${user?.username}`}>
+        <img
+          src={
+            user?.profilePicture ? `${PROFILES_FOLDER + user.profilePicture}` : `${DEFAULT_AVATAR}`
+          }
+          alt="avatar"
+          className="object-cover w-8 h-8 mr-3 border-none cursor-pointer rounded-2xl"
+        />
+      </Link>
     </div>
   );
 }
