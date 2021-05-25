@@ -4,7 +4,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
 import { useContext } from 'react';
-import { PF, PROFILES_FOLDER, DEFAULT_AVATAR } from '../constants/const';
+import { PROFILES_FOLDER, DEFAULT_AVATAR } from '../constants/const';
 import { AuthContext } from '../context/AuthContext';
 
 export default function Header() {
@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <div className="sticky top-0 flex items-center w-full h-12 bg-blue-medium">
       <div className="flex w-3/12">
-        <Link to="/home">
+        <Link to="/">
           <span className="ml-5 text-2xl font-bold text-white cursor-pointer">Social</span>
         </Link>
       </div>
@@ -28,6 +28,7 @@ export default function Header() {
       <div className="flex items-center justify-around w-4/12 text-white">
         <div className="flex">
           <NavLink
+            exact
             to="/"
             activeStyle={{
               fontWeight: 'bold',
