@@ -1,17 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Header from '../components/header';
+import Navbar from '../components/navbar';
 import LeftPanel from '../components/leftpanel';
 import Feed from '../components/feed';
 import RightPanelProfile from '../components/rightpanel-profile';
-import {
-  PF,
-  PROFILES_FOLDER,
-  POSTS_FOLDER,
-  DEFAULT_AVATAR,
-  DEFAULT_COVER
-} from '../constants/const';
+import { PROFILES_FOLDER, POSTS_FOLDER, DEFAULT_AVATAR, DEFAULT_COVER } from '../constants/const';
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -29,9 +23,9 @@ export default function Profile() {
   return (
     <>
       <div className="flex flex-col max-h-screen">
-        {/* Moved header absolute upwards to prevent it from being in viewport calc */}
+        {/* Moved Navbar absolute upwards to prevent it from being in viewport calc */}
         <div className="absolute left-0 flex w-full h-12 pt-12 -top-12">
-          <Header />
+          <Navbar />
         </div>
         <div className="flex justify-between w-full h-screen pt-12">
           <div className="flex w-3/12">

@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { PROFILES_FOLDER, DEFAULT_AVATAR } from '../constants/const';
 import { AuthContext } from '../context/AuthContext';
 
-export default function Header() {
+export default function Navbar() {
   const { user } = useContext(AuthContext);
   return (
     <div className="sticky top-0 flex items-center w-full h-12 bg-blue-medium">

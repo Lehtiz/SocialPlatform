@@ -1,4 +1,4 @@
-import Header from '../components/header';
+import Header from '../components/navbar';
 import LeftPanel from '../components/leftpanel';
 import Feed from '../components/feed';
 import RightPanel from '../components/rightpanel';
