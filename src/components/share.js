@@ -2,19 +2,29 @@ import RoomIcon from '@material-ui/icons/Room';
 import LabelIcon from '@material-ui/icons/Label';
 import MoodIcon from '@material-ui/icons/Mood';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
-import { PF, DEFAULT_AVATAR } from '../constants/const';
+import { useContext } from 'react';
+import { DEFAULT_AVATAR, PROFILES_FOLDER } from '../constants/const';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Share() {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="shadow-lg h-44 rounded-xl">
       <div className="p-2">
         <div className="flex items-center mb-1">
           <img
             className="object-cover w-12 h-12 mr-3 rounded-full"
-            src={`${DEFAULT_AVATAR}`}
+            src={
+              user.profilePicture !== '' ? PROFILES_FOLDER + user.profilePicture : DEFAULT_AVATAR
+            }
             alt="1.jpg"
           />
-          <input type="text" placeholder="Whats on your mind?" className="w-4/5 outline-none" />
+          <input
+            type="text"
+            placeholder={`Whats on your mind ${user.username}?`}
+            className="w-4/5 outline-none"
+          />
         </div>
         <hr className="m-5" />
         <div className="flex items-center justify-between">
