@@ -2,16 +2,22 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 import axios from 'axios';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PF, PROFILES_FOLDER, POSTS_FOLDER, DEFAULT_AVATAR } from '../constants/const';
+import { PROFILES_FOLDER, POSTS_FOLDER, DEFAULT_AVATAR } from '../constants/const';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Post({ post }) {
-  const [likes, setLikes] = useState(post.likes);
+  const [likes, setLikes] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+  const { user: currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    setIsLiked(post.likes.includes(currentUser._id));
+  }, [currentUser._id, post.likes]);
 
   // Get posts user
   useEffect(() => {
@@ -23,6 +29,11 @@ export default function Post({ post }) {
   }, [post.userId]);
 
   const likeHandler = () => {
+    try {
+      axios.put(`/post/${post._id}/like`, { userId: currentUser._id });
+    } catch (error) {
+      console.log(error);
+    }
     setLikes(isLiked ? likes - 1 : likes + 1);
     setIsLiked(!isLiked);
   };
@@ -62,10 +73,18 @@ export default function Post({ post }) {
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <FavoriteBorderIcon className="w-6 h-6 mr-1 cursor-pointer" />
-            <ExposurePlus1Icon className="w-6 h-6 mr-1 cursor-pointer" onClick={likeHandler} />
+            {isLiked
+              ? post.userId !== currentUser._id && (
+                  <FavoriteIcon className="w-6 h-6 mr-1 cursor-pointer" color="secondary" />
+                )
+              : post.userId !== currentUser._id && (
+                  <FavoriteBorderIcon className="w-6 h-6 mr-1 cursor-pointer" />
+                )}
+            {post.userId !== currentUser._id && (
+              <ExposurePlus1Icon className="w-6 h-6 mr-1 cursor-pointer" onClick={likeHandler} />
+            )}
             <span className="text-sm">
-              {likes.length} {likes.length === 1 ? `like` : `likes`}
+              {likes} {likes === 1 ? `like` : `likes`}
             </span>
           </div>
           <div className="text-sm border-b border-dashed cursor-pointer border-gray-border">
