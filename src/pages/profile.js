@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 import axios from 'axios';
 import Navbar from '../components/navbar';
 import LeftPanel from '../components/leftpanel';
@@ -19,7 +20,6 @@ export default function Profile() {
     };
     fetchUser();
   }, [username]);
-
   return (
     <>
       <div className="flex flex-col max-h-screen">
@@ -34,28 +34,46 @@ export default function Profile() {
           <div className="flex flex-col w-9/12">
             <div className="w-full">
               <div className="relative flex items-center justify-center w-full mb-1 h-60">
-                <img
-                  className="object-cover w-full rounded-b-md max-h-60"
-                  src={user.coverPicture ? POSTS_FOLDER + user.coverPicture : `${DEFAULT_COVER}`}
-                  alt={`${user.username}'s cover`}
-                />
-                <div className="absolute transform -translate-x-1/2 left-1/2 top-1/3 w-52 h-52">
+                {user.coverPicture === undefined ? (
+                  // eslint-disable-next-line react/jsx-curly-brace-presence
+                  <Skeleton count={1} width={800} height={240} className="" />
+                ) : (
                   <img
-                    className="object-cover border-4 border-white rounded-full w-52 h-52"
-                    src={
-                      user.profilePicture
-                        ? `${PROFILES_FOLDER + user.profilePicture}`
-                        : `${DEFAULT_AVATAR}`
-                    }
-                    alt={`${user.username}'s avatar`}
+                    className="object-cover w-full rounded-b-md max-h-60"
+                    src={user.coverPicture ? POSTS_FOLDER + user.coverPicture : `${DEFAULT_COVER}`}
+                    alt={`${user.username}'s cover`}
                   />
+                )}
+
+                <div className="absolute transform -translate-x-1/2 left-1/2 top-1/3 w-52 h-52">
+                  {user.profilePicture === undefined ? (
+                    <Skeleton circle width="100%" height="100%" />
+                  ) : (
+                    <img
+                      className="object-cover border-4 border-white rounded-full w-52 h-52"
+                      src={
+                        user.profilePicture
+                          ? `${PROFILES_FOLDER + user.profilePicture}`
+                          : `${DEFAULT_AVATAR}`
+                      }
+                      alt={`${user.username}'s avatar`}
+                    />
+                  )}
                 </div>
               </div>
               <div className="flex items-center justify-between mx-20">
-                <h4 className="text-4xl font-bold">{user.username}</h4>
-                <span className="font-light">
-                  <i>{user.desc}</i>
-                </span>
+                {user.username === undefined ? (
+                  <Skeleton count={1} width={300} height={30} />
+                ) : (
+                  <h4 className="text-4xl font-bold">{user.username}</h4>
+                )}
+                {user.desc === undefined ? (
+                  <Skeleton count={1} width={300} height={30} />
+                ) : (
+                  <span className="font-light">
+                    <i>{user.desc}</i>
+                  </span>
+                )}
               </div>
             </div>
             <div className="flex w-full h-full overflow-y-auto">
