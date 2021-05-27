@@ -63,7 +63,7 @@ export default function Post({ post }) {
         </div>
         <div className="my-5">
           <span className="">{post?.desc}</span>
-          {post.img !== undefined ? (
+          {post.img !== undefined && post.img !== null ? (
             <img
               src={POSTS_FOLDER + post.img}
               alt="post"
