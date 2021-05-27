@@ -25,5 +25,6 @@ coverage
 benchmarks/graphs
 
 .env
-
+public/images/avatars/*
+public/images/posts/*
 TODO
