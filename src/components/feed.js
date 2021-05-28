@@ -22,9 +22,12 @@ export default function Feed({ username }) {
 
   return (
     <div className="w-full min-h-full p-3 overflow-y-scroll">
-      <div className="w-full">
-        <Share />
-      </div>
+      {user.username === username && (
+        <div className="w-full">
+          <Share />
+        </div>
+      )}
+
       <div className="w-full">
         {posts.map((post) => (
           <Post key={post._id} post={post} />
