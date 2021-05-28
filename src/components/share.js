@@ -4,6 +4,7 @@ import MoodIcon from '@material-ui/icons/Mood';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import { useContext, useRef, useState } from 'react';
 import axios from 'axios';
+import { Cancel } from '@material-ui/icons';
 import { DEFAULT_AVATAR, PROFILES_FOLDER } from '../constants/const';
 import { AuthContext } from '../context/AuthContext';
 
@@ -43,7 +44,7 @@ export default function Share() {
   };
 
   return (
-    <div className="shadow-lg h-44 rounded-xl">
+    <div className="shadow-lg rounded-xl">
       <div className="p-2">
         <div className="flex items-center mb-1">
           <img
@@ -61,6 +62,15 @@ export default function Share() {
           />
         </div>
         <hr className="m-5" />
+        {file && (
+          <div className="relative px-5 pb-2 w-full">
+            <img src={URL.createObjectURL(file)} alt="" className="object-cover" />
+            <Cancel
+              className="absolute top-0 right-5 cursor-pointer text-white opacity-75"
+              onClick={() => setFile(null)}
+            />
+          </div>
+        )}
         <form className="flex items-center justify-between" onSubmit={handleSubmit}>
           <div className="flex ml-5">
             <label htmlFor="file" className="flex items-center mr-4 cursor-pointer">
