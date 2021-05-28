@@ -9,7 +9,7 @@ export default function Login() {
   // Fields required for login
   const email = useRef();
   const password = useRef();
-  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const { isFetching, error, dispatch } = useContext(AuthContext);
   const history = useHistory();
 
   const handleClick = (e) => {
@@ -17,7 +17,6 @@ export default function Login() {
     loginCall({ email: email.current.value, password: password.current.value }, dispatch);
     history.push(ROUTES.HOME);
   };
-  console.log('login cred: ', user);
   return (
     <div className="w-screen h-screen p-10 bg-gray-bg">
       <div className="flex w-3/4 mx-auto h-3/4">
