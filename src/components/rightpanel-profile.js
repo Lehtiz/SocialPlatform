@@ -9,8 +9,13 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function RightPanelProfile({ user }) {
   const [friends, setFriends] = useState([]);
-  const [followed, setFollowed] = useState(null);
-  const { user: currentUser } = useContext(AuthContext);
+  const { user: currentUser, dispatch } = useContext(AuthContext);
+  const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
+
+  // check followings state
+  useEffect(() => {
+    setFollowed(currentUser.followings.includes(user?._id));
+  }, [currentUser.followings, user?._id]);
 
   // get friends for profile
   useEffect(() => {
@@ -25,28 +30,19 @@ export default function RightPanelProfile({ user }) {
     getFriends();
   }, [user._id]);
 
-  // check followings state
-  useEffect(() => {
-    setFollowed(currentUser.followings.includes(user?.id));
-    console.log(currentUser.followings);
-    console.log(followed);
-  }, [currentUser, user?.id]);
-
   const followHandler = async () => {
-    console.log('clicked', user.username, currentUser.username);
     try {
       if (followed) {
         await axios.put(`/user/${user._id}/unfollow`, { userId: currentUser._id });
+        dispatch({ type: 'UNFOLLOW', payload: user._id });
       } else {
         await axios.put(`/user/${user._id}/follow`, { userId: currentUser._id });
+        dispatch({ type: 'FOLLOW', payload: user._id });
       }
       setFollowed(!followed);
     } catch (error) {
       console.log(error);
     }
-    // check if following
-    // friendList.includes(user._id) ? await axios.get(`/user/${user._id}/unfollow`, userId): await axios.get(`/user/${user._id}/unfollow`);
-    // toggle follow
   };
 
   return (
