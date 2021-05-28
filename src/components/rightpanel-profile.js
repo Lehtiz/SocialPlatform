@@ -27,7 +27,12 @@ export default function RightPanelProfile({ user }) {
         console.log(error);
       }
     };
-    getFriends();
+    // dont make api call without user initialized (1st render)
+    if (user._id !== undefined) {
+      getFriends();
+    } else {
+      return null;
+    }
   }, [user._id]);
 
   const followHandler = async () => {
