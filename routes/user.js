@@ -59,6 +59,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// get users followings
+router.get('/:userId/friends', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    const friends = await Promise.all(user.followings.map((friendId) => User.findById(friendId)));
+    const friendList = [];
+    friends.map((friend) => {
+      const { _id, username, profilePicture } = friend;
+      return friendList.push({ _id, username, profilePicture });
+    });
+    res.status(200).json(friendList);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
+
 // FOLLOW A USER
 router.put('/:id/follow', async (req, res) => {
   // Check that user followed is not user following (self)
@@ -75,7 +91,7 @@ router.put('/:id/follow', async (req, res) => {
       }
       // If currentUser already follows
       else {
-        res.status(403).json('Already are already following this user');
+        res.status(403).json('You are already following this user');
       }
     } catch (error) {
       res.status(500).json(error);
@@ -101,7 +117,7 @@ router.put('/:id/unfollow', async (req, res) => {
       }
       // If currentUser is not following
       else {
-        res.status(403).json('Already are not following this user');
+        res.status(403).json('You are not following this user');
       }
     } catch (error) {
       res.status(500).json(error);
