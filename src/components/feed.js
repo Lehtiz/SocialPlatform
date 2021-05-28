@@ -22,11 +22,14 @@ export default function Feed({ username }) {
 
   return (
     <div className="w-full min-h-full p-3 overflow-y-scroll">
-      {user.username === username && (
-        <div className="w-full">
-          <Share />
-        </div>
-      )}
+      {
+        // show share component on home page and own profile page
+        (!username || user.username === username) && (
+          <div className="w-full">
+            <Share />
+          </div>
+        )
+      }
 
       <div className="w-full">
         {posts.map((post) => (
