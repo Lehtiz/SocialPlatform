@@ -35,7 +35,6 @@ export default function Profile() {
             <div className="w-full">
               <div className="relative flex items-center justify-center w-full mb-1 h-60">
                 {user.coverPicture === undefined ? (
-                  // eslint-disable-next-line react/jsx-curly-brace-presence
                   <Skeleton count={1} width={800} height={240} className="" />
                 ) : (
                   <img
