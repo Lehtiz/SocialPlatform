@@ -9,6 +9,7 @@ module.exports = {
     extend: {},
     colors: {
       white: '#ffffff',
+      black: '#000000',
       blue: {
         medium: '#1877f2',
         login: '#1775ee'
@@ -26,6 +27,10 @@ module.exports = {
         border: '#808080',
         light: '#808080',
         bg: '#f0f2f5'
+      },
+      message: {
+        send: '#f5f1f1',
+        receive: '#1877f2'
       }
     }
   },
