@@ -24,9 +24,13 @@ app.use(morgan('tiny'));
 
 // Establish MongoDB connection
 // slow connection why seems to be caused by; useUnifiedTopology: true
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-  console.log('Connected to MongoDB');
-});
+mongoose.connect(
+  process.env.MONGO_URL,
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+  () => {
+    console.log('Connected to MongoDB');
+  }
+);
 
 // if using images path, don't expect requests instead goto dir
 app.use('/images', express.static(path.join(__dirname, '/public/images')));
