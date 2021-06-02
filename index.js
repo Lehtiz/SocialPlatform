@@ -16,6 +16,8 @@ const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/post');
 const uploadRoute = require('./routes/upload');
+const conversationsRoute = require('./routes/conversations');
+const messagesRoute = require('./routes/messages');
 
 // Middleware
 app.use(express.json());
@@ -39,6 +41,8 @@ app.use('/api/user', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/post', postRoute);
 app.use('/api/upload', uploadRoute);
+app.use('/api/conversations', conversationsRoute);
+app.use('/api/messages', messagesRoute);
 
 app.get('/', (req, res) => {
   res.send('Welcome to homepage');
