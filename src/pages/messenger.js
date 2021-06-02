@@ -1,5 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import { io } from 'socket.io-client';
+import { formatISO } from 'date-fns';
 import Navbar from '../components/navbar';
 import Conversation from '../components/messenger/conversation';
 import Message from '../components/messenger/message';
@@ -8,11 +10,48 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function Messenger() {
   const [conversations, setConversations] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const [incomingMessage, setIncomingMessage] = useState(null);
+  const socketRef = useRef(null);
   const { user: currentUser } = useContext(AuthContext);
   const scrollRef = useRef();
+
+  // create a connection to socket server on 1st render
+  useEffect(() => {
+    // set socketRef.current using websocket(ws)
+    socketRef.current = io('ws://localhost:8900');
+
+    //
+    socketRef.current.on('getMessage', (data) => {
+      setIncomingMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: formatISO(Date.now())
+      });
+    });
+  }, []); // run only once (on first render)
+
+  // get incoming messages
+  useEffect(() => {
+    //
+    // eslint-disable-next-line no-unused-expressions
+    incomingMessage &&
+      currentConversation?.members.includes(incomingMessage.sender) &&
+      setMessages((prev) => [...prev, incomingMessage]);
+  }, [incomingMessage, currentConversation]);
+
+  // register user with socket server, id with userId
+  useEffect(() => {
+    // add currentUser to sockets users array
+    socketRef.current.emit('addUser', currentUser._id);
+    // get updated list of clients
+    socketRef.current.on('getUsers', (users) => {
+      setOnlineUsers(users);
+    });
+  }, [currentUser]);
 
   // get currentUsers conversations
   useEffect(() => {
@@ -50,6 +89,16 @@ export default function Messenger() {
       sender: currentUser._id,
       text: newMessage
     };
+
+    // get reveicers userId from currentConversation, only has 2 values find the one not CurrentUser
+    const receiverId = currentConversation?.members.find((member) => member !== currentUser._id);
+    // send socket a notification on a new message
+    socketRef.current.emit('sendMessage', {
+      senderId: currentUser._id,
+      receiverId,
+      text: newMessage
+    });
+
     try {
       const res = await axios.post('/messages', message);
       // add new message to messages state
@@ -103,7 +152,7 @@ export default function Messenger() {
             {currentConversation ? ( // !== undefined && currentConversation !== null
               <div className="h-full overflow-y-auto">
                 {messages.map((m) => (
-                  <div key={m._id} ref={scrollRef}>
+                  <div key={m.createdAt} ref={scrollRef}>
                     <Message
                       // resolve owner of message comparing sender id and authed user
                       owner={m.sender === currentUser._id}
