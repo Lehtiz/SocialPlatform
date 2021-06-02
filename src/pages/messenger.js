@@ -49,7 +49,8 @@ export default function Messenger() {
     socketRef.current.emit('addUser', currentUser._id);
     // get updated list of clients
     socketRef.current.on('getUsers', (users) => {
-      setOnlineUsers(users);
+      // filter onlineUsers from currentusers followings using sockets list of online users
+      setOnlineUsers(currentUser.followings.filter((f) => users.some((u) => u.userId === f)));
     });
   }, [currentUser]);
 
@@ -193,9 +194,11 @@ export default function Messenger() {
           </div>
         </div>
         <div className="w-3/12 h-full p-2">
-          <ChatOnline />
-          <ChatOnline />
-          <ChatOnline />
+          <ChatOnline
+            onlineUsers={onlineUsers}
+            currentId={currentUser._id}
+            setCurrentConversation={setCurrentConversation}
+          />
         </div>
       </div>
     </>
