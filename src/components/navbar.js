@@ -55,10 +55,12 @@ export default function Navbar() {
             </span>
           </div>
           <div className="relative mr-4 cursor-pointer">
-            <ChatIcon className="h-6" />
-            <span className="absolute flex items-center justify-center w-4 h-4 text-xs text-white rounded-full bg-red-primary -top-1 -right-1">
-              1
-            </span>
+            <Link to="/messenger">
+              <ChatIcon className="h-6" />
+              <span className="absolute flex items-center justify-center w-4 h-4 text-xs text-white rounded-full bg-red-primary -top-1 -right-1">
+                1
+              </span>
+            </Link>
           </div>
           <div className="relative mr-4 cursor-pointer">
             <NotificationsIcon className="h-6" />
