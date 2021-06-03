@@ -59,6 +59,23 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET ALL USERS
+router.get('/all', async (req, res) => {
+  try {
+    // get all users
+    const users = await User.find();
+    const userList = [];
+    users.map((user) => {
+      // only return required data for pictures and names
+      const { _id, username, profilePicture } = user;
+      return userList.push({ _id, username, profilePicture });
+    });
+    res.status(200).json(userList);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
+
 // get users followings
 router.get('/:userId/friends', async (req, res) => {
   try {
