@@ -9,6 +9,7 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function RightPanelProfile({ user }) {
   const [friends, setFriends] = useState([]);
+  const [conversation, setConversation] = useState(null);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
 
@@ -49,19 +50,66 @@ export default function RightPanelProfile({ user }) {
       console.log(error);
     }
   };
+  const chatHandler = async () => {
+    console.log('clicked on chat');
+
+    if (conversation !== null) {
+      console.log('open a conversation');
+    } else {
+      console.log('create a conversation');
+      // create a new chat between user and CurrentUser
+      const reqBody = {
+        senderId: currentUser._id,
+        receiverId: user._id
+      };
+      const res = axios.post('/conversations', reqBody);
+      // redirect to messenger with the chat open
+      // `/messenger/${conversation}`
+    }
+  };
+
+  useEffect(() => {
+    // get conversation between users
+    const getConversation = async () => {
+      try {
+        // see if there exists a chat between users
+        const res = await axios.get(`/conversations/find/${currentUser._id}/${user._id}`);
+        // if chat between users does exist we can link to it
+        if (res.data !== null) setConversation(res.data._id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getConversation();
+  }, [user]);
 
   return (
     <>
       <div className="w-full min-h-full p-3 overflow-y-scroll">
         {user.username !== currentUser.username && (
-          <button
-            type="button"
-            className="flex cursor-pointer px-3 py-2 border-2 rounded-lg outline-none text-white bg-blue-medium items-center font-medium text-base"
-            onClick={followHandler}
-          >
-            {followed ? 'Unfollow' : 'Follow'}
-            {followed ? <Remove /> : <Add />}
-          </button>
+          <div className="flex">
+            <button
+              type="button"
+              className="flex cursor-pointer px-3 py-2 border-2 rounded-lg outline-none text-white bg-blue-medium items-center font-medium text-base"
+              onClick={followHandler}
+            >
+              {followed ? 'Unfollow' : 'Follow'}
+              {followed ? <Remove /> : <Add />}
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary flex cursor-pointer px-3 py-2 border-2 rounded-lg outline-none text-white bg-blue-medium items-center font-medium text-base"
+              onClick={chatHandler}
+            >
+              {conversation ? (
+                <Link className="btn btn-primary" to={`/messenger/${conversation}`}>
+                  Open chat
+                </Link>
+              ) : (
+                'Start a chat'
+              )}
+            </button>
+          </div>
         )}
         <h1 className="mb-1 text-4xl font-medium">User information</h1>
         <div className="mb-4">
