@@ -40,11 +40,11 @@ router.post(
 // get conversations of a user
 router.get('/:userId', async (req, res) => {
   try {
-    const conversation = await Conversation.find({
+    const conversations = await Conversation.find({
       // check if userId in array, returns all hits
       members: { $in: [req.params.userId] }
     });
-    res.status(200).json(conversation);
+    res.status(200).json(conversations);
   } catch (error) {
     res.status(500).json(error);
   }
