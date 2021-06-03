@@ -50,6 +50,19 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
+// get conversations with id
+router.get('/:conversationId/find', async (req, res) => {
+  try {
+    const conversation = await Conversation.findOne({
+      // check if userId in array, returns all hits
+      _id: req.params.conversationId
+    });
+    res.status(200).json(conversation);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 // get conversation between two users
 router.get('/find/:firstUserId/:secondUserId', async (req, res) => {
   try {
