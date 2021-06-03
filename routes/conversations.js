@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { body, validationResult } = require('express-validator');
 const Conversation = require('../models/conversation');
 
-// new conversation body('senderId').isLength({ min: 2 }).trim().escape(),
 router.post(
   '/',
   body('senderId').not().isEmpty().withMessage('senderId is required.').isLength({
@@ -30,14 +29,13 @@ router.post(
           savedConversation: result
         });
       });
-      // res.status(200).json(savedConversation);
     } catch (error) {
       res.status(500).json(error);
     }
   }
 );
 
-// get conversations of a user
+// get all conversations of a user
 router.get('/:userId', async (req, res) => {
   try {
     const conversations = await Conversation.find({
@@ -50,7 +48,7 @@ router.get('/:userId', async (req, res) => {
   }
 });
 
-// get conversations with id
+// get conversation with id
 router.get('/:conversationId/find', async (req, res) => {
   try {
     const conversation = await Conversation.findOne({
