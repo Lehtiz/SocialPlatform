@@ -17,6 +17,7 @@ export default function Post({ post }) {
   const { user: currentUser } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  // Check if post is liked by currentUser
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
   }, [currentUser._id, post.likes]);
@@ -28,7 +29,7 @@ export default function Post({ post }) {
       setUser(res.data);
     };
     fetchUser();
-  }, [post.userId]);
+  }, []);
 
   const likeHandler = async () => {
     try {
@@ -61,7 +62,6 @@ export default function Post({ post }) {
       // refresh page
       window.location.reload();
     }
-
     // close menu
     setAnchorEl(null);
   };
