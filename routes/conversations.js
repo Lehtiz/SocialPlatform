@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { body, validationResult } = require('express-validator');
 const Conversation = require('../models/conversation');
+const Message = require('../models/message');
 
 router.post(
   '/',
@@ -34,6 +35,32 @@ router.post(
     }
   }
 );
+
+// Delete a conversation
+router.delete('/:id/delete', async (req, res) => {
+  try {
+    // get conversation with id
+    const conversation = await Conversation.findById(req.params.id);
+
+    // user must be either sender of receiverto delete
+    if (conversation.members.includes(req.body.userId)) {
+      // delete all related messages associated with the conversation
+      await Message.deleteMany({
+        conversationId: conversation._id
+      });
+      // delete conversation
+      await conversation.deleteOne();
+      // report success
+      res
+        .status(200)
+        .json(`conversation with id:${req.params.id} deleted along with all it's messages`);
+    } else {
+      res.status(400).json('You can only delete your own conversations');
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 // get all conversations of a user
 router.get('/:userId', async (req, res) => {
