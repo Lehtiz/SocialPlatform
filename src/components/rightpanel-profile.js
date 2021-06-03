@@ -2,12 +2,13 @@
 // import CakeIcon from '@material-ui/icons/Cake';
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Add, Remove } from '@material-ui/icons';
 import { PROFILES_FOLDER, DEFAULT_AVATAR } from '../constants/const';
 import { AuthContext } from '../context/AuthContext';
 
 export default function RightPanelProfile({ user }) {
+  const history = useHistory();
   const [friends, setFriends] = useState([]);
   const [conversation, setConversation] = useState(null);
   const { user: currentUser, dispatch } = useContext(AuthContext);
@@ -36,6 +37,29 @@ export default function RightPanelProfile({ user }) {
     }
   }, [user._id]);
 
+  // Get conversations between users
+  useEffect(() => {
+    // get conversation between users
+    const getConversation = async () => {
+      // Only check for conversations if user is initialized
+      if (user !== undefined) {
+        // dont get conversations if looking at own profilepage
+        if (user._id !== currentUser._id) {
+          try {
+            // see if there exists a chat between users
+            const res = await axios.get(`/conversations/find/${currentUser._id}/${user._id}`);
+            // if chat between users does exist we can link to it
+            // res.data is can be empty if there are no conversations between users
+            setConversation(res.data?._id);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      }
+    };
+    getConversation();
+  }, [user._id, conversation]);
+
   const followHandler = async () => {
     try {
       if (followed) {
@@ -50,43 +74,34 @@ export default function RightPanelProfile({ user }) {
       console.log(error);
     }
   };
+
   const chatHandler = async () => {
-    console.log('clicked on chat');
-
-    if (conversation !== null) {
-      console.log('open a conversation');
-    } else {
-      console.log('create a conversation');
-      // create a new chat between user and CurrentUser
-      const reqBody = {
-        senderId: currentUser._id,
-        receiverId: user._id
-      };
-      const res = axios.post('/conversations', reqBody);
-      // redirect to messenger with the chat open
-      // `/messenger/${conversation}`
-    }
-  };
-
-  useEffect(() => {
-    // get conversation between users
-    const getConversation = async () => {
+    const reqBody = {
+      senderId: currentUser._id,
+      receiverId: user._id
+    };
+    // create a new chat between user and CurrentUser
+    const createConversation = async () => {
       try {
-        // see if there exists a chat between users
-        const res = await axios.get(`/conversations/find/${currentUser._id}/${user._id}`);
-        // if chat between users does exist we can link to it
-        if (res.data !== null) setConversation(res.data._id);
+        const res = await axios.post('/conversations', reqBody);
+        // Return id of the created conversation
+        return res.data.savedConversation._id;
       } catch (error) {
         console.log(error);
       }
     };
-    getConversation();
-  }, [user]);
+    // Wait for the creation to complete
+    createConversation()
+      // Move user to the messengers new conversation
+      .then((conversation) => {
+        history.push(`/messenger/${conversation}`);
+      });
+  };
 
   return (
     <>
       <div className="w-full min-h-full p-3 overflow-y-scroll">
-        {user.username !== currentUser.username && (
+        {user._id !== currentUser._id && (
           <div className="flex">
             <button
               type="button"
@@ -98,13 +113,11 @@ export default function RightPanelProfile({ user }) {
             </button>
             <button
               type="button"
-              className="btn btn-primary flex cursor-pointer px-3 py-2 border-2 rounded-lg outline-none text-white bg-blue-medium items-center font-medium text-base"
+              className="flex cursor-pointer px-3 py-2 border-2 rounded-lg outline-none text-white bg-blue-medium items-center font-medium text-base"
               onClick={chatHandler}
             >
               {conversation ? (
-                <Link className="btn btn-primary" to={`/messenger/${conversation}`}>
-                  Open chat
-                </Link>
+                <Link to={`/messenger/${conversation}`}>Open chat</Link>
               ) : (
                 'Start a chat'
               )}
