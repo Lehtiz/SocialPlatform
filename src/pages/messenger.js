@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 import { formatISO } from 'date-fns';
+import { useParams } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import Conversation from '../components/messenger/conversation';
 import Message from '../components/messenger/message';
@@ -9,6 +10,7 @@ import ChatOnline from '../components/messenger/chat_online';
 import { AuthContext } from '../context/AuthContext';
 
 export default function Messenger() {
+  const conversation = useParams(null);
   const [conversations, setConversations] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
@@ -53,6 +55,21 @@ export default function Messenger() {
       setOnlineUsers(currentUser.followings.filter((f) => users.some((u) => u.userId === f)));
     });
   }, [currentUser]);
+
+  // set currentconversation if param id is provided
+  useEffect(() => {
+    const getConversation = async () => {
+      if (conversation.id !== null && conversation.id !== undefined) {
+        try {
+          const res = await axios.get(`/conversations/${conversation.id}/find`);
+          setCurrentConversation(res.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    getConversation();
+  }, []);
 
   // get currentUsers conversations
   useEffect(() => {
