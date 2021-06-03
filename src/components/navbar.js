@@ -4,6 +4,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
 import { useContext } from 'react';
+import { ExitToApp } from '@material-ui/icons';
 import { PROFILES_FOLDER, DEFAULT_AVATAR } from '../constants/const';
 import { AuthContext } from '../context/AuthContext';
 
@@ -70,15 +71,29 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      <Link to={`/profile/${user?.username}`}>
-        <img
-          src={
-            user?.profilePicture ? `${PROFILES_FOLDER + user.profilePicture}` : `${DEFAULT_AVATAR}`
-          }
-          alt="avatar"
-          className="object-cover w-8 h-8 mr-3 border-none cursor-pointer rounded-2xl"
-        />
-      </Link>
+      <div>
+        <Link to={`/profile/${user?.username}`}>
+          <img
+            src={
+              user?.profilePicture
+                ? `${PROFILES_FOLDER + user.profilePicture}`
+                : `${DEFAULT_AVATAR}`
+            }
+            alt="avatar"
+            className="object-cover w-8 h-8 mr-3 border-none cursor-pointer rounded-2xl"
+          />
+        </Link>
+      </div>
+      <button
+        type="button"
+        className="mr-2"
+        onClick={() => {
+          localStorage.clear();
+          window.location.href = '/';
+        }}
+      >
+        <ExitToApp color="primary" />
+      </button>
     </div>
   );
 }
