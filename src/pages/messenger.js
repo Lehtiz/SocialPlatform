@@ -198,6 +198,7 @@ export default function Messenger() {
             onlineUsers={onlineUsers}
             currentId={currentUser._id}
             setCurrentConversation={setCurrentConversation}
+            currentConversationId={currentConversation?._id}
           />
         </div>
       </div>

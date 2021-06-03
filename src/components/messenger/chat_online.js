@@ -4,7 +4,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { DEFAULT_AVATAR, PROFILES_FOLDER } from '../../constants/const';
 
-export default function ChatOnline({ onlineUsers, currentId, setCurrentConversation }) {
+export default function ChatOnline({
+  onlineUsers,
+  currentId,
+  setCurrentConversation,
+  currentConversationId
+}) {
   const [friends, setFriends] = useState([]);
   const [onlinefriends, setOnlineFriends] = useState([]);
 
@@ -31,7 +36,9 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentConversat
   const handleClick = async (user) => {
     try {
       const res = await axios.get(`/conversations/find/${currentId}/${user._id}`);
-      setCurrentConversation(res.data);
+      if (res.data._id !== currentConversationId) {
+        setCurrentConversation(res.data);
+      }
     } catch (error) {
       console.log(error);
     }
