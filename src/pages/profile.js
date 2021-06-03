@@ -20,6 +20,7 @@ export default function Profile() {
     };
     fetchUser();
   }, [username]);
+
   return (
     <>
       <div className="flex flex-col max-h-screen">
