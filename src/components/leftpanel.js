@@ -7,10 +7,30 @@ import HelpIcon from '@material-ui/icons/Help';
 import WorkIcon from '@material-ui/icons/Work';
 import EventIcon from '@material-ui/icons/Event';
 import SchoolIcon from '@material-ui/icons/School';
-import { Users } from '../dummydata';
+import { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 import AllUsers from './all-users';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Leftpanel() {
+  const [users, setUsers] = useState([]);
+  const { user: currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      // get all users from api
+      try {
+        const res = await axios.get('/user/all');
+        const users = res.data;
+        // filter currentuser out of the array
+        setUsers(users.filter((user) => user?._id !== currentUser._id));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUsers();
+  }, []);
+
   return (
     <div className="w-full overflow-y-scroll">
       <div className="p-5">
@@ -57,8 +77,8 @@ export default function Leftpanel() {
         </button>
         <hr className="my-5" />
         <ul className="p-0 m-0 list-none">
-          {Users.map((u) => (
-            <AllUsers key={u.id} user={u} />
+          {users.map((u) => (
+            <AllUsers key={u._id} user={u} />
           ))}
         </ul>
       </div>
