@@ -6,6 +6,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import { PROFILES_FOLDER, POSTS_FOLDER, DEFAULT_AVATAR } from '../constants/const';
 import { AuthContext } from '../context/AuthContext';
 
@@ -14,6 +15,7 @@ export default function Post({ post }) {
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
@@ -28,14 +30,45 @@ export default function Post({ post }) {
     fetchUser();
   }, [post.userId]);
 
-  const likeHandler = () => {
+  const likeHandler = async () => {
     try {
-      axios.put(`/post/${post._id}/like`, { userId: currentUser._id });
+      await axios.put(`/post/${post._id}/like`, { userId: currentUser._id });
     } catch (error) {
       console.log(error);
     }
     setLikes(isLiked ? likes - 1 : likes + 1);
     setIsLiked(!isLiked);
+  };
+
+  const handleClick = (event) => {
+    // open menu
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleDeletePost = async () => {
+    // get post id
+    console.log('delete post', post._id, post.userId, currentUser._id);
+    // can only delete post if user is author
+    if (post.userId === currentUser._id) {
+      // send delete post request to api
+      try {
+        const reqBody = { userId: currentUser._id };
+        // send currentUsers id in body(data for axios)
+        await axios.delete(`/post/${post._id}/delete`, { data: reqBody });
+      } catch (error) {
+        console.log(error);
+      }
+      // refresh page
+      window.location.reload();
+    }
+
+    // close menu
+    setAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    // close menu
+    setAnchorEl(null);
   };
 
   return (
@@ -59,7 +92,30 @@ export default function Post({ post }) {
               Post age: {formatDistanceToNow(parseISO(post.createdAt))}
             </span>
           </div>
-          <MoreVertIcon className="w-6 h-6 mr-1 cursor-pointer" />
+          {
+            // hide edit buttons if user is not the author
+            user.username === currentUser.username && (
+              <>
+                <Button
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                  className="outline-none"
+                >
+                  <MoreVertIcon className="w-6 h-6 mr-1 cursor-pointer" />
+                </Button>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                >
+                  <MenuItem onClick={handleDeletePost}>Delete post</MenuItem>
+                </Menu>
+              </>
+            )
+          }
         </div>
         <div className="my-5">
           <span className="">{post?.desc}</span>
