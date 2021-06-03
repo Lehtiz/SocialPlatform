@@ -48,13 +48,16 @@ io.on("connection", (socket) => {
 
   // send and get message
   socket.on('sendMessage', ({ senderId, receiverId, text }) => {
-    // get user who this message is going to with userId
-    const receiver = getUser(receiverId);
-    // send to user new message
-    io.to(receiver.socketId).emit('getMessage', {
-      senderId,
-      text
-    });
+      // get user who this message is going to with userId
+      const receiver = getUser(receiverId);
+      
+      if (receiver){
+        // send to user new message
+        io.to(receiver.socketId).emit('getMessage', {
+          senderId,
+          text
+        });
+      }
   });
 
 });
