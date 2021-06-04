@@ -4,7 +4,7 @@ const Post = require('../models/post');
 const User = require('../models/user');
 
 // CREATE A POST
-router.post('/', body('desc').isLength({ min: 1 }).trim().escape(), async (req, res) => {
+router.post('/', body('desc').isLength({ min: 1 }).trim(), async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -19,7 +19,7 @@ router.post('/', body('desc').isLength({ min: 1 }).trim().escape(), async (req, 
 });
 
 // UPDATE A POST
-router.put('/:id', body('desc').isLength({ min: 1 }).trim().escape(), async (req, res) => {
+router.put('/:id', body('desc').isLength({ min: 1 }).trim(), async (req, res) => {
   try {
     // Find post
     const post = await Post.findById(req.params.id);

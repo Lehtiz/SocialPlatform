@@ -10,8 +10,7 @@ router.post(
     .isEmpty()
     .withMessage('message is required.')
     .isLength({ min: 1, max: 500 })
-    .trim()
-    .escape(),
+    .trim(),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

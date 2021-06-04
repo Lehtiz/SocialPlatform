@@ -12,7 +12,6 @@ const authValidate = [
   body('username')
     .trim()
     .isLength({ min: 2 })
-    .escape()
     .custom((value) =>
       User.findOne({ username: value }).then((user) => {
         if (user) {
@@ -23,7 +22,6 @@ const authValidate = [
   body('email', 'Email must be a valid email address')
     .isEmail()
     .trim()
-    .escape()
     .normalizeEmail()
     .custom((value) =>
       User.findOne({ email: value }).then((user) => {
@@ -41,7 +39,6 @@ const authValidate = [
     .matches('[A-Z]')
     .withMessage('Password must contain an uppercase letter')
     .trim()
-    .escape()
 ];
 
 // REGISTER
@@ -73,9 +70,9 @@ router.post('/register', authValidate, async (req, res) => {
 });
 const loginValidate = [
   // Check Username
-  check('email', 'Username Must Be an Email Address').isEmail().trim().escape().normalizeEmail(),
+  check('email', 'Username Must Be an Email Address').isEmail().trim().normalizeEmail(),
   // Check Password
-  check('password').isLength({ min: 8 }).trim().escape()
+  check('password').isLength({ min: 8 }).trim()
 ];
 // LOGIN
 router.post('/login', loginValidate, async (req, res) => {
