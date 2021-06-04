@@ -35,6 +35,8 @@ export default function Messenger() {
         createdAt: formatISO(Date.now())
       });
     });
+    // close socket connection if user navigates off the page
+    return () => socketRef.current.close();
   }, []); // run only once (on first render)
 
   // get incoming messages
