@@ -26,15 +26,16 @@ export default function ChatOnline({
     getFriends();
   }, [currentId]);
 
-  //
+  // filter online frieds
   useEffect(() => {
     // filter from friends only users who are online via socket
     setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
   }, [onlineUsers, friends]);
 
-  // get conversation between users
-  const handleClick = async (user) => {
+  // Select active conversation
+  const handleSelectConversation = async (user) => {
     try {
+      // get conversation between users
       const res = await axios.get(`/conversations/find/${currentId}/${user._id}`);
       if (res.data._id !== currentConversationId) {
         setCurrentConversation(res.data);
@@ -50,7 +51,7 @@ export default function ChatOnline({
         <div
           key={o._id}
           className="flex w-full items-center hover:bg-blue-medium rounded-lg cursor-pointer mb-2"
-          onClick={() => handleClick(o)}
+          onClick={() => handleSelectConversation(o)}
         >
           <div className="relative">
             <img
