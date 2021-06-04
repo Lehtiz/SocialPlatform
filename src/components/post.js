@@ -3,7 +3,6 @@ import axios from 'axios';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Menu, MenuItem } from '@material-ui/core';
