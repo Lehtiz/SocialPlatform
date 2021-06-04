@@ -27,7 +27,7 @@ function App() {
         }
       >
         <Switch>
-          <Route exact path={ROUTES.HOME} component={user ? Home : SignUp} />
+          <Route exact path={ROUTES.HOME} component={user ? Home : Login} />
           <Route path={ROUTES.SIGN_UP} component={user ? Home : SignUp} />
           <Route path={ROUTES.LOGIN} component={user ? Home : Login} />
           <Route path={ROUTES.PROFILE} component={user ? Profile : Login} />
