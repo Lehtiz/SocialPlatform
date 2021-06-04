@@ -131,14 +131,18 @@ export default function Post({ post }) {
           <div className="flex items-center">
             {isLiked
               ? post.userId !== currentUser._id && (
-                  <FavoriteIcon className="w-6 h-6 mr-1 cursor-pointer" color="secondary" />
+                  <FavoriteIcon
+                    className="w-6 h-6 mr-1 cursor-pointer"
+                    color="secondary"
+                    onClick={likeHandler}
+                  />
                 )
               : post.userId !== currentUser._id && (
-                  <FavoriteBorderIcon className="w-6 h-6 mr-1 cursor-pointer" />
+                  <FavoriteBorderIcon
+                    className="w-6 h-6 mr-1 cursor-pointer"
+                    onClick={likeHandler}
+                  />
                 )}
-            {post.userId !== currentUser._id && (
-              <ExposurePlus1Icon className="w-6 h-6 mr-1 cursor-pointer" onClick={likeHandler} />
-            )}
             <span className="text-sm">
               {likes} {likes === 1 ? `like` : `likes`}
             </span>
