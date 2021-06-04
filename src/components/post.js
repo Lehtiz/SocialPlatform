@@ -146,12 +146,14 @@ export default function Post({ post }) {
               {likes} {likes === 1 ? `like` : `likes`}
             </span>
           </div>
+          {/*
           <div className="text-sm border-b border-dashed cursor-pointer border-gray-border">
             <span>
               {post.comments !== undefined ? post.comments.length : 'no'}{' '}
               {post.comments === 1 ? `comment` : `comments`}
             </span>
           </div>
+          */}
         </div>
       </div>
     </div>

@@ -1,6 +1,8 @@
+/*
 import RoomIcon from '@material-ui/icons/Room';
 import LabelIcon from '@material-ui/icons/Label';
 import MoodIcon from '@material-ui/icons/Mood';
+*/
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import { useContext, useRef, useState } from 'react';
 import axios from 'axios';
@@ -75,7 +77,7 @@ export default function Share() {
           <div className="flex ml-5">
             <label htmlFor="file" className="flex items-center mr-4 cursor-pointer">
               <PermMediaIcon htmlColor="tomato" className="w-5 h-5 mr-1" />
-              <span className="">photo or video</span>
+              <span className="">Add an image</span>
               <input
                 style={{ display: 'none' }}
                 type="file"
@@ -84,6 +86,7 @@ export default function Share() {
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
+            {/*
             <div className="flex items-center mr-4 cursor-pointer">
               <LabelIcon htmlColor="blue" className="w-6 h-6 mr-1" />
               <span className="">Tag</span>
@@ -96,6 +99,7 @@ export default function Share() {
               <MoodIcon className="w-5 h-5 mr-1" />
               <span className="">Emotion</span>
             </div>
+            */}
           </div>
           <div className="flex mr-5">
             <button
