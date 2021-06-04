@@ -76,26 +76,30 @@ export default function RightPanelProfile({ user }) {
   };
 
   const chatHandler = async () => {
-    const reqBody = {
-      senderId: currentUser._id,
-      receiverId: user._id
-    };
-    // create a new chat between user and CurrentUser
-    const createConversation = async () => {
-      try {
-        const res = await axios.post('/conversations', reqBody);
-        // Return id of the created conversation
-        return res.data.savedConversation._id;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // Wait for the creation to complete
-    createConversation()
-      // Move user to the messengers new conversation
-      .then((conversation) => {
-        history.push(`/messenger/${conversation}`);
-      });
+    if (!conversation) {
+      // create a new chat between user and CurrentUser
+      const createConversation = async () => {
+        const reqBody = {
+          senderId: currentUser._id,
+          receiverId: user._id
+        };
+        try {
+          const res = await axios.post('/conversations', reqBody);
+          // Return id of the created conversation
+          return res.data.savedConversation._id;
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      // Wait for the creation to complete
+      createConversation()
+        // Move user to the messengers new conversation
+        .then((conversation) => {
+          history.push(`/messenger/${conversation}`);
+        });
+    } else {
+      history.push(`/messenger/${conversation}`);
+    }
   };
 
   return (
@@ -116,11 +120,7 @@ export default function RightPanelProfile({ user }) {
               className="flex cursor-pointer px-3 py-2 border-2 rounded-lg outline-none text-white bg-blue-medium items-center font-medium text-base"
               onClick={chatHandler}
             >
-              {conversation ? (
-                <Link to={`/messenger/${conversation}`}>Open chat</Link>
-              ) : (
-                'Start a chat'
-              )}
+              {conversation ? 'Open chat' : 'Start a chat'}
             </button>
           </div>
         )}
