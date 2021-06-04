@@ -41,11 +41,6 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   };
 
-  const handleClick = (event) => {
-    // open menu
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleDeletePost = async () => {
     // get post id
     console.log('delete post', post._id, post.userId, currentUser._id);
@@ -64,6 +59,11 @@ export default function Post({ post }) {
     }
     // close menu
     setAnchorEl(null);
+  };
+
+  const handleMenuOpen = (event) => {
+    // open menu
+    setAnchorEl(event.currentTarget);
   };
 
   const handleMenuClose = () => {
@@ -99,7 +99,7 @@ export default function Post({ post }) {
                 <Button
                   aria-controls="simple-menu"
                   aria-haspopup="true"
-                  onClick={handleClick}
+                  onClick={handleMenuOpen}
                   className="outline-none"
                 >
                   <MoreVertIcon className="w-6 h-6 mr-1 cursor-pointer" />
