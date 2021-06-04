@@ -30,7 +30,11 @@ export default function Feed({ username }) {
           </div>
         )
       }
-
+      {posts?.length === 0 && (
+        <div className="text-4xl font-semibold opacity-30 text-center">
+          {username} has no posts.
+        </div>
+      )}
       <div className="w-full">
         {posts.map((post) => (
           <Post key={post._id} post={post} />
