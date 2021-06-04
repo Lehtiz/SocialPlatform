@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { DEFAULT_AVATAR, PROFILES_FOLDER } from '../../constants/const';
@@ -48,8 +46,9 @@ export default function ChatOnline({
   return (
     <div className="flex flex-col">
       {onlinefriends.map((o) => (
-        <div
+        <button
           key={o._id}
+          type="button"
           className="flex w-full items-center hover:bg-blue-medium rounded-lg cursor-pointer mb-2"
           onClick={() => handleSelectConversation(o)}
         >
@@ -64,7 +63,7 @@ export default function ChatOnline({
             <span className="absolute top-0 right-2 w-4 h-4 border-2 border-white rounded-full bg-green-online" />
           </div>
           <span className="font-medium">{o.username}</span>
-        </div>
+        </button>
       ))}
     </div>
   );
