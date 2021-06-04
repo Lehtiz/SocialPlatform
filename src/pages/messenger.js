@@ -8,6 +8,7 @@ import Conversation from '../components/messenger/conversation';
 import Message from '../components/messenger/message';
 import ChatOnline from '../components/messenger/chat_online';
 import { AuthContext } from '../context/AuthContext';
+import { SOCKET } from '../constants/const';
 
 export default function Messenger() {
   const conversation = useParams(null);
@@ -24,7 +25,7 @@ export default function Messenger() {
   // create a connection to socket server on 1st render
   useEffect(() => {
     // set socketRef.current using websocket(ws)
-    socketRef.current = io('ws://localhost:8900');
+    socketRef.current = io(SOCKET);
 
     //
     socketRef.current.on('getMessage', (data) => {
