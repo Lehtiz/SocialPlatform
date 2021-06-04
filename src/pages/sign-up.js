@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 export default function SignUp() {
@@ -7,12 +7,12 @@ export default function SignUp() {
   const email = useRef();
   const password = useRef();
   const passwordAgain = useRef();
+  const [errors, setErrors] = useState([]);
 
   const history = useHistory();
 
   const handleClick = async (e) => {
     e.preventDefault();
-
     if (passwordAgain.current.value !== password.current.value) {
       passwordAgain.current.setCustomValidity("Passwords don't match");
     } else {
@@ -25,10 +25,12 @@ export default function SignUp() {
         await axios.post('/auth/register', user);
         history.push('login');
       } catch (error) {
+        setErrors(error.response.data.errors);
         console.log(error);
       }
     }
   };
+
   return (
     <div className="w-screen h-screen p-10 bg-gray-bg">
       <div className="flex w-3/4 mx-auto h-3/4">
@@ -93,6 +95,13 @@ export default function SignUp() {
               </Link>
             </div>
           </form>
+          {errors.length > 0 && (
+            <div className="bg-gray-bg border rounded-lg text-red items-center p-2">
+              {errors.map((e) => (
+                <div key={e.msg}>{e.msg}</div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
