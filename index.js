@@ -1,5 +1,6 @@
 // Rquired packages
 const express = require('express');
+const session = require('express-session');
 
 const app = express();
 const mongoose = require('mongoose');
@@ -10,6 +11,21 @@ const path = require('path');
 
 // Loads .env file contents into process.env
 dotenv.config();
+
+// SECURITY
+// Hide infrastructure for security
+app.use(helmet.hidePoweredBy());
+// trust first proxy
+app.set('trust proxy', 1);
+// change def cookie name etc
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    name: 'sessionId'
+  })
+);
 
 // Define routes
 const userRoute = require('./routes/user');
