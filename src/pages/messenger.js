@@ -151,18 +151,12 @@ export default function Messenger() {
             />
           </div>
           {conversations.map((c) => (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-            <div
+            <Conversation
               key={c._id}
-              className=""
-              role="button"
-              tabIndex="0"
-              onClick={() => {
-                setCurrentConversation(c);
-              }}
-            >
-              <Conversation conversation={c} currentUser={currentUser} />
-            </div>
+              conversation={c}
+              currentUser={currentUser}
+              setCurrentConversation={setCurrentConversation}
+            />
           ))}
         </div>
         <div className="w-6/12 h-full p-2">
