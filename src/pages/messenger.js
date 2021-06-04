@@ -146,10 +146,14 @@ export default function Messenger() {
       <div className="flex w-full h-screen pt-12">
         <div className="w-3/12 h-full p-2">
           <div className="mb-2">
+            <h1 className="text-4xl font-bold">Active chats</h1>
+            <hr className="my-2" />
+            {/*
             <input
               placeholder="Search for friends"
               className="w-11/12 outline-none border-b border-gray-border"
             />
+          */}
           </div>
           {conversations.map((c) => (
             <Conversation

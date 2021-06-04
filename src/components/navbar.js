@@ -2,7 +2,7 @@ import { NavLink, Link } from 'react-router-dom';
 import PersonIcon from '@material-ui/icons/Person';
 import ChatIcon from '@material-ui/icons/Chat';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import { useContext } from 'react';
 import { ExitToApp } from '@material-ui/icons';
 import { PROFILES_FOLDER, DEFAULT_AVATAR } from '../constants/const';
@@ -18,6 +18,7 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex w-5/12">
+        {/*
         <div className="flex items-center justify-center w-full h-8 bg-white rounded-lg">
           <SearchIcon className="h-6" />
           <input
@@ -25,6 +26,7 @@ export default function Navbar() {
             className="w-11/12 border-none outline-none"
           />
         </div>
+        */}
       </div>
       <div className="flex items-center justify-around w-4/12 text-white">
         <div className="flex">

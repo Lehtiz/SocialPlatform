@@ -1,3 +1,4 @@
+/*
 import RssFeedIcon from '@material-ui/icons/RssFeed';
 import ChatIcon from '@material-ui/icons/Chat';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
@@ -7,6 +8,7 @@ import HelpIcon from '@material-ui/icons/Help';
 import WorkIcon from '@material-ui/icons/Work';
 import EventIcon from '@material-ui/icons/Event';
 import SchoolIcon from '@material-ui/icons/School';
+*/
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import AllUsers from './all-users';
@@ -34,6 +36,8 @@ export default function Leftpanel() {
   return (
     <div className="w-full overflow-y-scroll">
       <div className="p-5">
+        {/*
+
         <ul className="p-0 m-0 list-none">
           <li className="flex items-center mb-5">
             <RssFeedIcon className="h-6 mr-4" />
@@ -75,7 +79,9 @@ export default function Leftpanel() {
         <button className="w-40 p-2 font-medium border-none rounded-md" type="submit">
           Show more
         </button>
-        <hr className="my-5" />
+      */}
+        <h1 className="font-bold text-4xl">Other users</h1>
+        <hr className="my-2" />
         <ul className="p-0 m-0 list-none">
           {users.map((u) => (
             <AllUsers key={u._id} user={u} />
