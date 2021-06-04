@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
-import PersonIcon from '@material-ui/icons/Person';
+// import PersonIcon from '@material-ui/icons/Person';
 import ChatIcon from '@material-ui/icons/Chat';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+// import NotificationsIcon from '@material-ui/icons/Notifications';
 // import SearchIcon from '@material-ui/icons/Search';
 import { useContext } from 'react';
 import { ExitToApp } from '@material-ui/icons';
@@ -51,12 +51,14 @@ export default function Navbar() {
           </NavLink>
         </div>
         <div className="flex">
+          {/*
           <div className="relative mr-4 cursor-pointer">
             <PersonIcon className="h-6" />
             <span className="absolute flex items-center justify-center w-4 h-4 text-xs text-white rounded-full bg-red-primary -top-1 -right-1">
               1
             </span>
           </div>
+            */}
           <div className="relative mr-4 cursor-pointer">
             <Link to="/messenger">
               <ChatIcon className="h-6" />
@@ -65,12 +67,14 @@ export default function Navbar() {
               </span>
             </Link>
           </div>
+          {/*
           <div className="relative mr-4 cursor-pointer">
             <NotificationsIcon className="h-6" />
             <span className="absolute flex items-center justify-center w-4 h-4 text-xs text-white rounded-full bg-red-primary -top-1 -right-1">
               1
             </span>
           </div>
+          */}
         </div>
       </div>
       <div>
