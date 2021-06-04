@@ -42,7 +42,7 @@ router.delete('/:id/delete', async (req, res) => {
     // get conversation with id
     const conversation = await Conversation.findById(req.params.id);
 
-    // user must be either sender of receiverto delete
+    // user must be either sender of receiver to delete
     if (conversation.members.includes(req.body.userId)) {
       // delete all related messages associated with the conversation
       await Message.deleteMany({
