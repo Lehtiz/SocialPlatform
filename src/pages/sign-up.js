@@ -28,13 +28,6 @@ export default function SignUp() {
         console.log(error);
       }
     }
-    console.log(
-      'clicked',
-      username.current.value,
-      email.current.value,
-      password.current.value,
-      passwordAgain.current.value
-    );
   };
   return (
     <div className="w-screen h-screen p-10 bg-gray-bg">
