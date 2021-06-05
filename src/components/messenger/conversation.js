@@ -38,7 +38,6 @@ export default function Conversation({ conversation, currentUser, setCurrentConv
     window.location.reload();
   };
   const handleSelectConversation = () => {
-    console.log('select convo', conversation._id);
     setCurrentConversation(conversation);
   };
 
