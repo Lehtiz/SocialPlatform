@@ -44,7 +44,12 @@ app.use(morgan('tiny'));
 // slow connection why seems to be caused by; useUnifiedTopology: true
 mongoose.connect(
   process.env.MONGO_URL,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  },
   () => {
     console.log('Connected to MongoDB');
   }
