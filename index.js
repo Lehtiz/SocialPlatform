@@ -23,7 +23,11 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    name: 'sessionId'
+    name: 'sessionId',
+    cookie: {
+      // secure: true,
+      sameSite: 'strict'
+    }
   })
 );
 
