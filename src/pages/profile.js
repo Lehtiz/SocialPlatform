@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import axios from 'axios';
 import Navbar from '../components/navbar';
@@ -7,8 +7,10 @@ import LeftPanel from '../components/leftpanel';
 import Feed from '../components/feed';
 import RightPanelProfile from '../components/rightpanel-profile';
 import { PROFILES_FOLDER, POSTS_FOLDER, DEFAULT_AVATAR, DEFAULT_COVER } from '../constants/const';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Profile() {
+  const { user: currentUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
   const { username } = useParams();
 
@@ -83,6 +85,14 @@ export default function Profile() {
               <div className="flex w-2/5 h-full overflow-y-auto">
                 <RightPanelProfile user={user} />
               </div>
+              {
+                // show edit link for authed currenuser only
+                username === currentUser.username && (
+                  <Link className="absolute top-64 z-10 bg-white rounded-lg p-2" to="/edit-profile">
+                    Edit profile
+                  </Link>
+                )
+              }
             </div>
           </div>
         </div>
